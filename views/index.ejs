@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>Animals</title>
+    <style>
+            h3{
+                color:gray;
+                font-weight: 700;
+    
+            }
+            span{
+                color:blue;
+                font-weight: 900;
+                margin-left:100px;
+            }
+        </style>
+</head>
+<body>
+    <div>
+        <!-- tip to easily see objects printed in full instead of [object Object] -->
+<%- JSON.stringify(messages) %> 
+<!-- based on the structure of your messages, determine how to display them -->
+<% if(messages.registration) { %>
+     <% for (var x of messages.registration) { %>
+      <h3><%= x %></h3>
+     <% } %>
+ <% } %>
+    </div>
+    <div>
+       
+            <h2>Here are the animals!</h2>
+               <% for(user in users){ %>
+                    
+                      <h3>" <%= users[user].name %> "</h3>
+                       <span>-- <%= users[user].color %> </span><a href="/animals/<%=users[user].id %>"><button>Edit</button></a>&nbsp;
+                                                                <a href="/animals/destroy/<%=users[user].id%>"><button>Delete</button></a><br/><br/>
+                  <% } %>
+        </div>
+    
+</body>
+</html>

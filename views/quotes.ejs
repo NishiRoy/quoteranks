@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+ 
+    <title>Quotes Display</title>
+    <style>
+        h3{
+            color:gray;
+            font-weight: 700;
+
+        }
+        span{
+            color:blue;
+            font-weight: 900;
+            margin-left:100px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Here are the awesome quotes!</h2>
+           <% for(user in users){ %>
+                
+                  <h3>" <%= users[user].quote %> "</h3>
+                   <span>-- <%= users[user].name %> at <%= users[user].time %></span><br/><br/>
+              <% } %>
+    </div>
+   
+</body>
+</html>
