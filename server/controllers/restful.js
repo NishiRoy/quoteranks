@@ -37,7 +37,7 @@ this.createnew=function(req,res){
 
 this.destroy=function(req,res){
     console.log("Imma delete you");
-    Quotes.remove({_id:req.params.id},function(err,author){
+    Quotes.findOneAndRemove({_id:req.params.id},function(err,quo){
         if(err)
         {
             console.log('error');
@@ -46,7 +46,7 @@ this.destroy=function(req,res){
         else
         {
             console.log('Succesfully deleted');
-            res.json({message:'success',data:author})
+            res.json({message:'success',data:quo})
         }
 
     })
@@ -114,7 +114,7 @@ this.editPost=function(req,res){
 
     console.log("Here",req.body);
 
-    Quotes.update({_id:req.body.id},{$set:{'votes':req.body.votes}},function(err,quo){
+    Quotes.findById(req.body.id,function(err,quo){
 
         if(err)
         {
@@ -122,8 +122,16 @@ this.editPost=function(req,res){
             res.json({message:'error',error:err});
         }
         else{
-            console.log("Successfully updated this");
-            res.json({message:"success",data:quo});
+            console.log(quo,"Hey ",req.body.votes);
+            quo.votes=Number(req.body.votes);
+            quo.save(function(err,q){
+                if(err)
+                console.log("It did not update");
+                else{
+                    console.log("Successfully updated this");
+                    res.json({message:"success",data:q});
+                }
+            })
         }
     })
 }
